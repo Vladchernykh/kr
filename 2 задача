@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int size = 10;
+    int* arr = new int[size];
+    int count = 0;
+    int sum = 0;
+
+    int input; 
+    while (true) {
+        cout << "Enter a number (-1 to stop): ";
+        cin >> input;
+        if (input == -1) {
+            break;
+        } else if (input < -1) {
+            cout << "Invalid input\n"; 
+        } else {
+            if (count == size) {
+                int* temp = new int[size*2];
+                for (int i = 0; i < size; i++) {
+                    temp[i] = arr[i];
+                }
+                delete[] arr;
+                arr = temp;
+                size *= 2;
+            }
+            arr[count] = input;
+            count++;
+            sum += input;
+        }
+    }
+    cout << "Sum of inputs: " << sum << endl;
+    cout << "Number of inputs: " << count << endl;
+    cout << "Array contents: ";
+    for (int i = 0; i < count; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    delete[] arr; 
+    return 0;
+}
